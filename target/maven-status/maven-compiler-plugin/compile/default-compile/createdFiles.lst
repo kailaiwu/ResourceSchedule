@@ -1,0 +1,6 @@
+schedule\constraint\ConstraintType.class
+schedule\constraint\rule\TypeNumberConstraintRule.class
+schedule\Scheduler.class
+schedule\constraint\ApplicationType.class
+schedule\constraint\rule\AbstractConstraintRule.class
+schedule\constraint\rule\TotalNumberConstraintRule.class
