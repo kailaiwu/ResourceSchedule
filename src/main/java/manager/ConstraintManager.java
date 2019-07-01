@@ -30,20 +30,19 @@ public class ConstraintManager {
 
     private static final String filePath = "D:\\MyProject\\Github\\ResourceSchedule\\constraint.properties";
 
-    private Set<AbstractConstraintRule> rules = new HashSet<AbstractConstraintRule>();
+    private Set<AbstractConstraintRule> rules = new HashSet<>();
 
     /**
      * 初始化限制规则
      */
     public void init() throws Exception {
-        //1. 加载配置文件
+        //加载配置文件
         Properties pros = new Properties();
         InputStream rs = new FileInputStream(filePath);
         pros.load(rs);
-
         //遍历读取文件
         for (Entry<Object, Object> entry : pros.entrySet()) {
-            int type = Integer.parseInt((String) entry.getKey()) ;
+            int type = Integer.parseInt((String) entry.getKey());
             String parameters = (String) entry.getValue();
             parse(type, parameters);
         }

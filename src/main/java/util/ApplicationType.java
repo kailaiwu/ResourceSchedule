@@ -8,7 +8,8 @@ import java.util.Set;
  */
 
 public class ApplicationType {
-    private static Set<Integer> VALIDATE_TYPES = new HashSet<Integer>();
+    /** 应用类型集合 */
+    private static Set<Integer> VALIDATE_TYPES = new HashSet<>();
 
     /** 站点 */
     public static final int SITE = 1;
@@ -26,6 +27,9 @@ public class ApplicationType {
         VALIDATE_TYPES.add(TIMING_TASK);
     }
 
+    /**
+     * 是否为合法的应用类型
+     */
     public static boolean isValidateType(int type) {
         return VALIDATE_TYPES.contains(type);
     }

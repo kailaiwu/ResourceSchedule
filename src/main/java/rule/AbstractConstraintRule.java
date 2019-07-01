@@ -1,7 +1,7 @@
 package rule;
 
 /**
- * 限制条件抽象类
+ * 限制规则抽象类
  */
 
 public abstract class AbstractConstraintRule {
@@ -13,7 +13,7 @@ public abstract class AbstractConstraintRule {
     }
 
     /**
-     * 限制条件是否满足
+     * 限制规则是否满足
      */
     public abstract boolean isSatisfy();
 }

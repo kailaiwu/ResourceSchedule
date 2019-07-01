@@ -7,7 +7,7 @@ import util.ConstraintType;
  */
 
 public class TotalNumberConstraintRule extends AbstractConstraintRule {
-    /** 限制数量 **/
+    /** 应用限制总数量 **/
     private final int totalConstraintNum;
 
     public TotalNumberConstraintRule(int totalConstraintNum) {

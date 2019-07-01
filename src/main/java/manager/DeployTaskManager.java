@@ -23,14 +23,17 @@ public class DeployTaskManager {
         return DeployTaskManager.SingletonHolder.instance;
     }
 
+    /** 间隔时间：间隔时间内不允许两个相同的部署任务同时进入队列 */
+    private static final long INTERVAL_TIME = 3 * 1000;
+
+    /** 队列容量 */
+    private static final int QUEUE_SIZE = 10;
+
     /**
      * 部署任务队列
      * 需设置一个容量上限
      */
-    private volatile BlockingQueue<DeployTask> deployTasks = new LinkedBlockingQueue<>(10);
-
-    /** 间隔时间：间隔时间内不允许两个相同的部署任务同时进入队列 */
-    public static final long INTERVAL_TIME = 3 * 1000;
+    private volatile BlockingQueue<DeployTask> deployTasks = new LinkedBlockingQueue<>(QUEUE_SIZE);
 
     /**
      * 记录新部署任务入队时间

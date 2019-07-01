@@ -8,6 +8,7 @@ import java.util.Set;
  */
 
 public class ConstraintType {
+    /** 限制规则类型集合 */
     private static Set<Integer> VALIDATE_TYPES = new HashSet<Integer>();
 
     /** 单机部署应用总数量限制 */
@@ -20,6 +21,9 @@ public class ConstraintType {
         VALIDATE_TYPES.add(TYPE_NUM_LIMIT);
     }
 
+    /**
+     * 是否为合法的限制规则类型
+     */
     public static boolean isValidateType(int type) {
         return VALIDATE_TYPES.contains(type);
     }

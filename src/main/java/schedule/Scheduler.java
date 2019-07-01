@@ -40,7 +40,7 @@ public class Scheduler implements Runnable {
         for (DeploySingleTask task : tasks) {
             try {
                 lock.lockInterruptibly();
-                //1）查询数据库 + 获得调度结果
+                //1）查询数据库 + 得出调度结果
                 //2）执行部署操作
                 //3）更新数据库
             } catch(Exception e) {
