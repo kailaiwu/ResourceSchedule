@@ -88,7 +88,6 @@ public class DatabaseManager {
     public boolean removeLabel(String ip, int label) throws Exception {
         String sql = "UPDATE host SET label = label & ?  WHERE ip = ?";
         pstmt = conn.prepareStatement(sql);
-        pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, ~label);
         pstmt.setString(2, ip);
         int result = pstmt.executeUpdate();
