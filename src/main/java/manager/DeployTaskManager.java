@@ -33,7 +33,7 @@ public class DeployTaskManager {
      * 部署任务队列
      * 需设置一个容量上限
      */
-    private volatile BlockingQueue<DeployTask> deployTasks = new LinkedBlockingQueue<>(QUEUE_SIZE);
+    private volatile BlockingQueue<DeployTask> deployTasks = new LinkedBlockingQueue<DeployTask>(QUEUE_SIZE);
 
     /**
      * 记录新部署任务入队时间

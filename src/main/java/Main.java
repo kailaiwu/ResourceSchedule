@@ -1,6 +1,6 @@
-import manager.ConnectionManager;
-import manager.ConstraintManager;
+import manager.InitManager;
 import schedule.Scheduler;
+
 
 /**
  * 资源调度入口
@@ -9,16 +9,8 @@ import schedule.Scheduler;
 public class Main {
     public static void main(String[] args) throws Exception {
         //初始化
-        init();
+        InitManager.getInstance().init();
         //单线程执行
         new Thread(new Scheduler()).start();
-    }
-
-    /**
-     * 初始化
-     */
-    private static void init() throws Exception {
-        ConnectionManager.getInstance().init();
-        ConstraintManager.getInstance().init();
     }
 }

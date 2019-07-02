@@ -1114,16 +1114,29 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="280" parent="7" name="wkl_test1"/>
-    <column id="281" parent="280" name="name">
+    <table id="280" parent="7" name="host"/>
+    <column id="281" parent="280" name="ip">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="280" name="age">
+    <column id="282" parent="280" name="label">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>int(255) unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
+    <column id="283" parent="280" name="deploy_info">
+      <Position>3</Position>
+      <DataType>json|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="284" parent="280" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ip</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

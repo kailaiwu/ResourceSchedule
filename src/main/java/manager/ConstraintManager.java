@@ -30,7 +30,7 @@ public class ConstraintManager {
 
     private static final String filePath = "D:\\MyProject\\Github\\ResourceSchedule\\constraint.properties";
 
-    private Set<AbstractConstraintRule> rules = new HashSet<>();
+    private Set<AbstractConstraintRule> rules = new HashSet<AbstractConstraintRule>();
 
     /**
      * 初始化限制规则

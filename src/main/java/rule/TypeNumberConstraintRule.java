@@ -1,5 +1,6 @@
 package rule;
 
+import task.DeploySingleTask;
 import util.ConstraintType;
 
 /**
@@ -19,7 +20,7 @@ public class TypeNumberConstraintRule extends AbstractConstraintRule {
     }
 
     @Override
-    public boolean isSatisfy() {
+    public boolean isSatisfy(String ip, DeploySingleTask task) {
         return true;
     }
 }

@@ -1,5 +1,7 @@
 package rule;
 
+import task.DeploySingleTask;
+
 /**
  * 限制规则抽象类
  */
@@ -15,5 +17,5 @@ public abstract class AbstractConstraintRule {
     /**
      * 限制规则是否满足
      */
-    public abstract boolean isSatisfy();
+    public abstract boolean isSatisfy(String ip, DeploySingleTask task);
 }
