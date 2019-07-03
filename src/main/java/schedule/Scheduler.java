@@ -52,14 +52,15 @@ public class Scheduler implements Runnable {
                     candidates.add(ip);
                 }
                 if (candidates.isEmpty()) {
-                    System.err.println("id = " + task.getId() + "的应用自动部署失败");
+                    System.err.println("id = " + task.getId() + "的应用部署失败。失败原因：当前没有主机匹配");
                     continue;
                 }
                 //指定部署
                 if (task.isAppointed()) {
                     String ip = task.getIp();
                     if (!candidates.contains(ip)) {
-                        System.err.println("id = " + task.getId() + "的应用指定部署失败");
+                        System.err.println("id = " + task.getId() + "的应用指定部署失败。" +
+                                "失败原因：指定部署主机不在匹配主机集合里面");
                         continue;
                     }
                 }

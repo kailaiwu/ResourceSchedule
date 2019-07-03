@@ -32,10 +32,14 @@ public class DataManager {
         //初始化部署任务
         int uniqId = 1;
         DeployTask task = new DeployTask(uniqId);
-        task.addTask(new DeploySingleTask(1, 1));
-        task.addTask(new DeploySingleTask(2, 2));
-        task.addTask(new DeploySingleTask(3, 4));
-        task.addTask(new DeploySingleTask(4, 8));
+        //task.addTask(new DeploySingleTask(1, 1));
+        //task.addTask(new DeploySingleTask(2, 2));
+        //task.addTask(new DeploySingleTask(3, 4));
+        //task.addTask(new DeploySingleTask(4, 8));
+        task.addTask(new DeploySingleTask(1, 1, 1, "127.0.0.1"));
+        task.addTask(new DeploySingleTask(2, 2, 1, "127.0.0.1"));
+        task.addTask(new DeploySingleTask(3, 4, 1, "127.0.0.1"));
+        task.addTask(new DeploySingleTask(4, 8, 1, "127.0.0.1"));
         DeployTaskManager.getInstance().addDeployTask(task);
     }
 
