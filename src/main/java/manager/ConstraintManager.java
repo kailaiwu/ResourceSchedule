@@ -31,6 +31,9 @@ public class ConstraintManager {
 
     private static final String filePath = "D:\\MyProject\\Github\\ResourceSchedule\\constraint.properties";
 
+    /**
+     * 限制规则集合
+     */
     private Set<AbstractConstraintRule> rules = new HashSet<AbstractConstraintRule>();
 
     /**
@@ -47,6 +50,7 @@ public class ConstraintManager {
             String parameters = (String) entry.getValue();
             parse(type, parameters);
         }
+        //添加通用限制规则
         rules.add(new CommonConstraintRule());
     }
 
@@ -54,14 +58,14 @@ public class ConstraintManager {
      * 解析限制规则
      */
     private void parse(int type, String parameters) {
-       switch(type) {
+       switch (type) {
            case ConstraintType.TOTAL_NUM_LIMIT:
                int totalConstraintNum = Integer.parseInt(parameters);
                rules.add(new TotalNumberConstraintRule(totalConstraintNum));
                break;
            case ConstraintType.TYPE_NUM_LIMIT:
-               String[] ruleStrs = parameters.split(";");
-               for(String ruleStr : ruleStrs) {
+               String[] ruleStrings = parameters.split(";");
+               for (String ruleStr : ruleStrings) {
                    int applicationType = Integer.parseInt(ruleStr.split(":")[0]);
                    int typeConstraintNum = Integer.parseInt(ruleStr.split(":")[1]);
                    rules.add(new TypeNumberConstraintRule(applicationType, typeConstraintNum));

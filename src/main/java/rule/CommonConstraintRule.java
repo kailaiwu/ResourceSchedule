@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CommonConstraintRule extends AbstractConstraintRule {
     public CommonConstraintRule() {
-        super(ConstraintType.TOTAL_NUM_LIMIT);
+        super(ConstraintType.COMMON);
     }
 
     @Override

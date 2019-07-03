@@ -19,8 +19,6 @@ public class InitManager {
     public void init() throws Exception {
         //初始化限制条件
         ConstraintManager.getInstance().init();
-        //初始化任务
-
         //初始化数据
         DataManager.getInstance().init();
     }

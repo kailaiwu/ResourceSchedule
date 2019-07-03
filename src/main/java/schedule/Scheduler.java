@@ -41,6 +41,11 @@ public class Scheduler implements Runnable {
                 List<String> ips = DataManager.getInstance().getAllIps();
                 List<String> candidates = new ArrayList<String>();
                 for (String ip : ips) {
+                    //标签筛选
+                    if (!isLabelSatisfy(ip, task)) {
+                        continue;
+                    }
+                    //限制规则筛选
                     if (!isAllRuleSatisfy(ip, task)) {
                         continue;
                     }
@@ -50,14 +55,24 @@ public class Scheduler implements Runnable {
                     System.err.println("id = " + task.getId() + "的应用部署失败");
                     continue;
                 }
+                //优选
                 String finalIp = selectBest(candidates);
+                //部署
                 deploy(task.getId(), finalIp);
                 //更新数据库
                 new DatabaseManager().addDeploy(finalIp, task.getId(), task.getType());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 判断主机label是否满足
+     */
+    private boolean isLabelSatisfy(String ip, DeploySingleTask task) throws Exception {
+        int label = new DatabaseManager().getLabel(ip);
+        return (label & task.getType()) == 0;
     }
 
     /**
@@ -65,7 +80,7 @@ public class Scheduler implements Runnable {
      */
     private boolean isAllRuleSatisfy(String ip, DeploySingleTask task) throws Exception {
         Set<AbstractConstraintRule> rules = ConstraintManager.getInstance().getConstraintRules();
-        for(AbstractConstraintRule rule : rules) {
+        for (AbstractConstraintRule rule : rules) {
             //只要有一个限制规则不满足，即为匹配失败
             if (!rule.isSatisfy(ip, task)) {
                 return false;
@@ -76,6 +91,7 @@ public class Scheduler implements Runnable {
 
     /**
      * 优选
+     * 当前优选规则：随机策略
      */
     private String selectBest(List<String> candidates) {
         int index = new Random().nextInt(candidates.size());

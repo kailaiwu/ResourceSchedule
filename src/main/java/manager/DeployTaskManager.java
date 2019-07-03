@@ -53,7 +53,7 @@ public class DeployTaskManager {
     private boolean canEnterQueue(DeployTask task) {
         int uniqId = task.getUniqId();
         Long time = uniqId2Time.get(uniqId);
-        if(time != null) {
+        if (time != null) {
             return System.currentTimeMillis() - time > INTERVAL_TIME;
         }
         return true;
@@ -64,10 +64,10 @@ public class DeployTaskManager {
      * 加锁
      */
     public synchronized boolean addDeployTask(DeployTask task) {
-        if(!canEnterQueue(task)) {
+        if (!canEnterQueue(task)) {
             return false;
         }
-        if(!deployTasks.offer(task)) {
+        if (!deployTasks.offer(task)) {
             return false;
         }
         uniqId2Time.put(task.getUniqId(), System.currentTimeMillis());

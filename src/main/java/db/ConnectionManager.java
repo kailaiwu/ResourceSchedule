@@ -30,7 +30,7 @@ public class ConnectionManager {
             //通过反射加载驱动
             Class.forName(driverClass);
             //初始化连接
-            Connection connection = DriverManager.getConnection(url,user,password);
+            Connection connection = DriverManager.getConnection(url, user, password);
             return connection;
         } catch (Exception e) {
             e.printStackTrace();

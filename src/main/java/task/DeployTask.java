@@ -1,5 +1,6 @@
 package task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,16 @@ public class DeployTask {
     /** 单部署子任务集合 */
     private final List<DeploySingleTask> tasks;
 
-    public DeployTask(int uniqId, List<DeploySingleTask> tasks) {
+    public DeployTask(int uniqId) {
         this.uniqId = uniqId;
-        this.tasks = tasks;
+        this.tasks = new ArrayList<DeploySingleTask>();
+    }
+
+    /**
+     * 添加部署子任务
+     */
+    public void addTask(DeploySingleTask task) {
+        tasks.add(task);
     }
 
     public int getUniqId() {

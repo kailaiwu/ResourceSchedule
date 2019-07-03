@@ -5,9 +5,7 @@ import task.DeploySingleTask;
 import task.DeployTask;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 数据管理器
@@ -29,16 +27,15 @@ public class DataManager {
     private List<String> allIps = new ArrayList<String>();
 
     public void init() throws Exception {
-        //获取所有主机IP
+        //初始化所有主机IP
         allIps = new DatabaseManager().getAllIps();
         //初始化部署任务
         int uniqId = 1;
-        List<DeploySingleTask> subTasks = new ArrayList<DeploySingleTask>();
-        subTasks.add(new DeploySingleTask(1, 1));
-        subTasks.add(new DeploySingleTask(2, 2));
-        subTasks.add(new DeploySingleTask(3, 4));
-        subTasks.add(new DeploySingleTask(4, 8));
-        DeployTask task = new DeployTask(uniqId, subTasks);
+        DeployTask task = new DeployTask(uniqId);
+        task.addTask(new DeploySingleTask(1, 1));
+        task.addTask(new DeploySingleTask(2, 2));
+        task.addTask(new DeploySingleTask(3, 4));
+        task.addTask(new DeploySingleTask(4, 8));
         DeployTaskManager.getInstance().addDeployTask(task);
     }
 
