@@ -17,7 +17,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class Scheduler implements Runnable {
     public void run() {
-        while(true) {
+        while (true) {
             BlockingQueue<DeployTask> deployTasks = DeployTaskManager.getInstance().getDeployTasks();
             if (!deployTasks.isEmpty()) {
                 List<DeployTask> tasks = new ArrayList<DeployTask>();
@@ -52,11 +52,19 @@ public class Scheduler implements Runnable {
                     candidates.add(ip);
                 }
                 if (candidates.isEmpty()) {
-                    System.err.println("id = " + task.getId() + "的应用部署失败");
+                    System.err.println("id = " + task.getId() + "的应用自动部署失败");
                     continue;
                 }
+                //指定部署
+                if (task.isAppointed()) {
+                    String ip = task.getIp();
+                    if (!candidates.contains(ip)) {
+                        System.err.println("id = " + task.getId() + "的应用指定部署失败");
+                        continue;
+                    }
+                }
                 //优选
-                String finalIp = selectBest(candidates);
+                String finalIp = selectBest(task, candidates);
                 //部署
                 deploy(task.getId(), finalIp);
                 //更新数据库
@@ -93,7 +101,10 @@ public class Scheduler implements Runnable {
      * 优选
      * 当前优选规则：随机策略
      */
-    private String selectBest(List<String> candidates) {
+    private String selectBest(DeploySingleTask task, List<String> candidates) {
+        if (task.isAppointed()) {
+            return task.getIp();
+        }
         int index = new Random().nextInt(candidates.size());
         return candidates.get(index);
     }

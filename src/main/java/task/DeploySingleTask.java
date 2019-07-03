@@ -28,6 +28,10 @@ public class DeploySingleTask {
         this.ip = ip;
     }
 
+    public boolean isAppointed() {
+        return isAppointed == 1;
+    }
+
     public int getId() {
         return id;
     }
