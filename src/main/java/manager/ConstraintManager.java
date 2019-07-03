@@ -1,5 +1,6 @@
 package manager;
 
+import rule.CommonConstraintRule;
 import util.ConstraintType;
 import rule.AbstractConstraintRule;
 import rule.TotalNumberConstraintRule;
@@ -46,6 +47,7 @@ public class ConstraintManager {
             String parameters = (String) entry.getValue();
             parse(type, parameters);
         }
+        rules.add(new CommonConstraintRule());
     }
 
     /**
