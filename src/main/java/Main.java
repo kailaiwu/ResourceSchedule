@@ -1,3 +1,4 @@
+import db.DatabaseManager;
 import manager.InitManager;
 import schedule.Scheduler;
 

@@ -30,8 +30,8 @@ public class DatabaseManager {
     /**
      * 获取所有主机IP
      */
-    public Set<String> getAllIps() throws Exception {
-        Set<String> allIps = new HashSet<String>();
+    public List<String> getAllIps() throws Exception {
+        List<String> allIps = new ArrayList<String>();
         String sql = "SELECT ip FROM host";
         stat = conn.createStatement();
         rs = stat.executeQuery(sql);
@@ -56,6 +56,9 @@ public class DatabaseManager {
         rs = pstmt.executeQuery();
         while (rs.next()) {
             String jsonString = rs.getString("deploy_info");
+            if(null == jsonString || "".equals(jsonString)) {
+                return list;
+            }
             JsonArray jsonArray = new JsonParser().parse(jsonString).getAsJsonArray();
             int size = jsonArray.size();
             for (int i = 0; i < size; i++) {
@@ -67,6 +70,35 @@ public class DatabaseManager {
         }
         close();
         return list;
+    }
+
+    /**
+     * 添加部署信息
+     */
+    public boolean addDeploy(String ip, int id, int type) throws Exception {
+        String sql = "UPDATE host SET deploy_info = " +
+                "JSON_ARRAY_APPEND(deploy_info, '$', JSON_OBJECT('id', ?, 'type', ?)) WHERE ip = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.setInt(2, type);
+        pstmt.setString(3, ip);
+        int result = pstmt.executeUpdate();
+        close();
+        return result > 0;
+    }
+
+    /**
+     * 删除部署信息
+     */
+    public boolean removeDeploy(String ip, int id) throws Exception {
+        String sql = "UPDATE host SET deploy_info = " +
+                "JSON_REMOVE(deploy_info, '$[0]') WHERE ip = ?";
+        pstmt = conn.prepareStatement(sql);
+        //pstmt.setInt(1, id);
+        pstmt.setString(1, ip);
+        int result = pstmt.executeUpdate();
+        close();
+        return result > 0;
     }
 
     /**

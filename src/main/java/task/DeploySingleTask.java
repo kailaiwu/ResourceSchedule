@@ -27,4 +27,20 @@ public class DeploySingleTask {
         this.isAppointed = isAppointed;
         this.ip = ip;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public int getIsAppointed() {
+        return isAppointed;
+    }
+
+    public String getIp() {
+        return ip;
+    }
 }

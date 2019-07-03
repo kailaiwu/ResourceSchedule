@@ -1,7 +1,11 @@
 package rule;
 
+import db.DatabaseManager;
+import entity.DeployInfo;
 import task.DeploySingleTask;
 import util.ConstraintType;
+
+import java.util.List;
 
 /**
  * 应用总数量限制规则类
@@ -17,7 +21,8 @@ public class TotalNumberConstraintRule extends AbstractConstraintRule {
     }
 
     @Override
-    public boolean isSatisfy(String ip, DeploySingleTask task) {
-        return true;
+    public boolean isSatisfy(String ip, DeploySingleTask task) throws Exception {
+        List<DeployInfo> infos = new DatabaseManager().getDeployedInfo(ip);
+        return infos.size() < totalConstraintNum;
     }
 }

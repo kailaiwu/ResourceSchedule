@@ -17,5 +17,5 @@ public abstract class AbstractConstraintRule {
     /**
      * 限制规则是否满足
      */
-    public abstract boolean isSatisfy(String ip, DeploySingleTask task);
+    public abstract boolean isSatisfy(String ip, DeploySingleTask task) throws Exception;
 }
